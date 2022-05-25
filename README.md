@@ -33,3 +33,18 @@ display: flex-direction: row (default)
 
 - CSS flexbox 연습 사이트
 - https://flexboxfroggy.com/
+
+
+## #2 GRID
+
+- **display: grid; (필수)**
+- grid-template-columns: % % % %;
+- grid-template-rows: % %;
+- columns-gap : % px;
+- rows-gap : % px;
+- grid-template-areas :
+    - gird-area:
+- grid-column(row)-start / end: % ; 시작은 왼쪽(위), 끝은 무조건 오른쪽(아래)
+    - grid-column(row) : start / end;  ← 이게 더 자주 쓰임
+    - grid-colum(row): span; ← 시작부터 끝까지
+    - grid-colum(row): -1/ 1; ← span과 같은 의미
