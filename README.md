@@ -48,3 +48,16 @@ display: flex-direction: row (default)
     - grid-column(row) : start / end;  ← 이게 더 자주 쓰임
     - grid-colum(row): span; ← 시작부터 끝까지
     - grid-colum(row): -1/ 1; ← span과 같은 의미
+
+    - `fr` 단위는 높이가 없다. height를 반드시 지정해줘야함 ‼️
+    - grid-template : 
+    ”header header header header” 1fr 
+    "content content content nav" 2fr
+    "footer footer footer footer" 1fr / 1fr 1fr 1fr 1fr;
+        - “ 끝에 fr 은 컬럼의 높이를 나타낸다.
+        - **repeat() 은 사용하지 못한다.**
+    - justify-items / align-items: 주요축 / 보조축 (가로/세로)
+    - place-items: 보조축(세로) 주요축(가로);
+    - justify-content / align-content: grid를 전체 움직이는 것. 정렬 (주요축 / 보조축)
+    * align-content 를 보려면 충분한 높이가 필요하다.
+    - place-content : 보조축 주요축;
