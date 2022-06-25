@@ -1,32 +1,39 @@
 import gulp from 'gulp';
-import ghtml from 'gulp-html-import';
+// import ghtml from 'gulp-html-import';
+// import gfileinclude from 'gulp-file-include';
+import htmlmin from 'gulp-htmlmin';
 import del from 'del';
 // import sass from 'gulp-sass';
 import minify from 'gulp-csso';
 import autoprefixer from 'gulp-autoprefixer';
+import ws from 'gulp-webserver';
+import gimage from 'gulp-image';
+import ghPages from 'gulp-gh-pages';
 
 const sass = require('gulp-sass')(require('node-sass'));
 
 const routes = {
   html: {
-    watch: 'src/*.html',
-    src: 'src/index.html',
+    watch: 'src/html/*.html',
+    src: 'src/html/*.html',
     dest: 'build',
   },
   img: {
-    watch: 'src/img/*',
+    src: 'src/img/*',
     dest: 'build/img',
   },
   scss: {
     watch: 'src/scss/*.scss',
-    src: 'src/scss/styles.scss',
+    src: 'src/scss/*.scss',
     dest: 'build/css',
   },
 };
 
-const html = () => {
-  gulp.src(routes.pug.src).pipe(ghtml()).pipe(gulp.dest(routes.html.dest));
-};
+const html = () =>
+  gulp
+    .src(routes.html.src)
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest(routes.html.dest));
 
 const styles = () =>
   gulp
@@ -41,21 +48,24 @@ const styles = () =>
     .pipe(minify())
     .pipe(gulp.dest(routes.scss.dest));
 
-const img = () =>
-  gulp.src(routes.img.src).pipe(image()).pipe(gulp.dest(routes.img.dest));
+const images = () =>
+  gulp.src(routes.img.src).pipe(gimage()).pipe(gulp.dest(routes.img.dest));
 
-const watch = () => {
-  gulp.watch(routes.html.watch, html);
-  gulp.watch(routes.scss.watch, styles);
-  gulp.watch(routes.img.watch, img);
-};
+const ghDeploy = () => gulp.src('build/**/*').pipe(ghPages());
+
+const watch = () => gulp.watch(routes.html.watch, html);
+gulp.watch(routes.scss.watch, styles);
 
 const clean = () => del(['build/', '.publish']);
 
-const prepare = gulp.series([clean]);
+const webserver = () => gulp.src('build').pipe(ws({ livereload: true }));
 
-const assets = gulp.series([styles]);
+const prepare = gulp.series([clean, images]);
 
-const live = gulp.parallel([watch]);
+const assets = gulp.parallel([html, styles]);
 
-export const dev = gulp.series([prepare, assets, live]);
+const live = gulp.parallel([webserver, watch]);
+
+export const build = gulp.series([prepare, assets]);
+export const dev = gulp.series([build, live]);
+export const deploy = gulp.series([build, ghDeploy]);
