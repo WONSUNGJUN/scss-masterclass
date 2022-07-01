@@ -1,6 +1,10 @@
 # scss-masterclass
 Nomad Coders &lt;CSS Layout 마스터클래스> 강의를 들으며 CSS 를 학습하는 저장소입니다.
 
+npm install 
+
+npm run start
+
 ## #1 FLEXBOX
 
 display: block (div default)
@@ -80,4 +84,28 @@ display: flex-direction: row (default)
 - Grid 연습 사이트
     
     [Grid Garden](http://cssgridgarden.com/)
+
+   --- 
     
+## Clone: 
+- [x] https://besthorrorscenes.com/  
+
+- [ ] https://paint-box.com/ 
+
+- [ ] http://10x19.co/ 
+
+- [ ] http://www.z-o-o.fr/
+
+- [ ] https://schwartzmedia.com.au/
+
+- [ ] https://tolv.dk/
+
+- [ ] https://rodicdavidson.co.uk/
+
+- [ ] https://beige.de/
+
+- [ ] http://donicaida.com/
+
+- [ ] https://canalstreet.market/
+
+- [ ] https://wonhundred.com/
